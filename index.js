@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
+import Swipeable from 'react-native-swipeable';
 
 import {
   View,
@@ -177,7 +178,17 @@ class SettingsList extends React.Component {
 
     let titleInfoPosition = item.titleInfoPosition ? item.titleInfoPosition : this.props.defaultTitleInfoPosition;
 
+    const Wrapper = ({ children, key }) => (
+        item.swipeableProps ?
+        <Swipeable key={key} {...item.swipeableProps}>
+            { children }
+        </Swipeable>
+        :
+        children
+    );
+
     return (
+      <Wrapper key={'item_' + index}>
       <TouchableHighlight accessible={false} key={'item_' + index} underlayColor={item.underlayColor ? item.underlayColor : this.props.underlayColor} onPress={item.onPress} onLongPress={item.onLongPress} ref={item.itemRef}>
         <View style={item.itemBoxStyle ? item.itemBoxStyle : [styles.itemBox, {backgroundColor: item.backgroundColor ? item.backgroundColor : this.props.backgroundColor}]}>
           {item.icon}
@@ -227,7 +238,8 @@ class SettingsList extends React.Component {
         }
         </View>
       </TouchableHighlight>
-    )
+      </Wrapper>
+    );
   }
 
   itemArrowIcon(item) {
