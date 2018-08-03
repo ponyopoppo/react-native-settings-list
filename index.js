@@ -178,7 +178,7 @@ class SettingsList extends React.Component {
 
     let titleInfoPosition = item.titleInfoPosition ? item.titleInfoPosition : this.props.defaultTitleInfoPosition;
 
-    const Wrapper = ({ children, key }) => (
+    const Wrapper = ({ children }) => (
         item.swipeableProps ?
         <Swipeable {...item.swipeableProps}>
             { children }
